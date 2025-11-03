@@ -1,4 +1,4 @@
-# AI Trading Signal Generatoe
+# AI Trading Signal Generator
 
 A professional AI-powered trading system that analyzes technical indicators and generates trading signals using multiple AI providers. Features a modern web interface for real-time market analysis and automated trading execution.
 
