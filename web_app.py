@@ -3,7 +3,7 @@ AI Trading Expert Advisor Web Interface
 Provides a professional web UI for the AI-based trading system
 """
 
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, redirect, url_for, session
 import sys
 import os
 import json
@@ -21,20 +21,110 @@ sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
 from app_ai_based import MT5TradingEA, TradingSignal
 
+# Import Flask extensions for user management
+from flask_login import LoginManager, UserMixin, login_user, login_required, logout_user, current_user
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.security import generate_password_hash, check_password_hash
+
 app = Flask(__name__,
             template_folder='templates',
             static_folder='static')
+
+# Flask configuration for user managementyour-secret-key-here
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY', 'lIMITED123!XsfegthhhttbMF34R9FSSWW')
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# Initialize extensions
+db = SQLAlchemy(app)
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
 
 # Global variables to store the EA instance and current signal
 ea_instance = None
 current_signal = None
 
+# User model
+class User(UserMixin, db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(150), unique=True, nullable=False)
+    email = db.Column(db.String(150), unique=True, nullable=False)
+    password_hash = db.Column(db.String(150), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    is_admin = db.Column(db.Boolean, default=False)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
+
+    def check_password(self, password):
+        return check_password_hash(self.password_hash, password)
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
 @app.route('/')
 def index():
-    """Main page"""
-    return render_template('ai_trader.html')
+    """Main page - redirect to login if not authenticated"""
+    if current_user.is_authenticated:
+        return render_template('ai_trader.html')
+    return redirect(url_for('login'))
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    """User login page"""
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+
+        user = User.query.filter_by(username=username).first()
+        if user and user.check_password(password):
+            login_user(user)
+            return redirect(url_for('index'))
+
+        return render_template('login.html', error='Invalid username or password')
+
+    return render_template('login.html')
+
+@app.route('/register', methods=['GET', 'POST'])
+def register():
+    """User registration page"""
+    if request.method == 'POST':
+        username = request.form.get('username')
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        if User.query.filter_by(username=username).first():
+            return render_template('register.html', error='Username already exists')
+
+        if User.query.filter_by(email=email).first():
+            return render_template('register.html', error='Email already exists')
+
+        user = User(username=username, email=email)
+        user.set_password(password)
+        db.session.add(user)
+        db.session.commit()
+
+        return redirect(url_for('login'))
+
+    return render_template('register.html')
+
+@app.route('/logout')
+@login_required
+def logout():
+    """User logout"""
+    logout_user()
+    return redirect(url_for('login'))
+
+@app.route('/profile')
+@login_required
+def profile():
+    """User profile page"""
+    return render_template('profile.html')
 
 @app.route('/run_ai_analysis', methods=['POST'])
+@login_required
 def run_ai_analysis():
     """Run AI analysis and return results"""
     global ea_instance, current_signal
@@ -128,6 +218,7 @@ def run_ai_analysis():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/get_current_signal')
+@login_required
 def get_current_signal():
     """Get the current trading signal"""
     global current_signal
@@ -153,6 +244,7 @@ def get_current_signal():
     return jsonify(response)
 
 @app.route('/execute_trade', methods=['POST'])
+@login_required
 def execute_trade():
     """Execute the current trading signal"""
     global ea_instance, current_signal
@@ -175,6 +267,7 @@ def execute_trade():
         return jsonify({'error': str(e)}), 500
 
 @app.route('/get_mt5_status')
+@login_required
 def get_mt5_status():
     """Get MT5 connection status"""
     try:
@@ -192,6 +285,7 @@ def get_mt5_status():
         return jsonify({'connected': False, 'error': str(e)})
 
 @app.route('/get_symbols')
+@login_required
 def get_symbols():
     """Get available trading symbols from MT5"""
     try:
@@ -235,7 +329,62 @@ def get_symbols():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/get_user_signals')
+@login_required
+def get_user_signals():
+    """Get trading signals filtered by user parameters"""
+    try:
+        # Get query parameters
+        symbol = request.args.get('symbol')
+        signal_type = request.args.get('signal_type')
+        confidence = request.args.get('confidence')
+        date_from = request.args.get('date_from')
+        date_to = request.args.get('date_to')
+
+        # For now, return the current signal if it matches filters
+        # In a real implementation, you'd query a database
+        global current_signal
+
+        if current_signal is None:
+            return jsonify({'signals': []})
+
+        # Apply filters
+        matches = True
+
+        if symbol and current_signal.symbol != symbol:
+            matches = False
+        if signal_type and current_signal.signal_type != signal_type:
+            matches = False
+        if confidence and current_signal.confidence != confidence:
+            matches = False
+
+        if matches:
+            signals = [{
+                'id': 1,
+                'symbol': current_signal.symbol,
+                'signal_type': current_signal.signal_type,
+                'entry_price': current_signal.entry_price,
+                'stop_loss': current_signal.stop_loss,
+                'take_profit_1': current_signal.take_profit_1,
+                'position_size': current_signal.position_size,
+                'confidence': current_signal.confidence,
+                'reasoning': current_signal.reasoning,
+                'timestamp': current_signal.timestamp.isoformat(),
+                'user_id': current_user.id
+            }]
+        else:
+            signals = []
+
+        return jsonify({'signals': signals})
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 if __name__ == '__main__':
+    # Create database tables
+    with app.app_context():
+        db.create_all()
+
     print("🚀 Starting AI Trading Expert Advisor Web Interface...")
     print("📊 Open your browser to http://localhost:9000")
     app.run(debug=True, host='0.0.0.0', port=9000)

@@ -38,9 +38,16 @@
 <body class="bg-gray-50 min-h-screen">
     <div class="gradient-bg text-white py-6 px-4">
         <div class="max-w-7xl mx-auto">
-            <div class="flex items-center space-x-3">
-                <i data-lucide="brain" class="w-8 h-8"></i>
-                <h1 class="text-3xl font-bold">AI Trading Expert Advisor</h1>
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <i data-lucide="brain" class="w-8 h-8"></i>
+                    <h1 class="text-3xl font-bold">AI Trading Expert Advisor</h1>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <span class="text-blue-100">Welcome, {{ current_user.username }}!</span>
+                    <a href="{{ url_for('profile') }}" class="text-blue-100 hover:text-white">Profile</a>
+                    <a href="{{ url_for('logout') }}" class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg">Logout</a>
+                </div>
             </div>
             <p class="mt-2 text-blue-100">Professional AI-powered trading signals with real-time analysis</p>
         </div>
