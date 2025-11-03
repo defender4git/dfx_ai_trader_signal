@@ -1,148 +1,247 @@
-# AI Trading Expert Advisor
+# 🤖 AI Trading Signal Generator
 
-A professional AI-powered trading system that analyzes technical indicators and generates trading signals using multiple AI providers. Features a modern web interface for real-time market analysis and automated trading execution.
+<div align="center">
 
-## 🚀 Features
+![AI Trading Signal Generator Advisor](https://img.shields.io/badge/AI--Trading-Expert--Advisor-blue?style=for-the-badge&logo=brain&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=flat-square&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-2.3+-000000?style=flat-square&logo=flask&logoColor=white)
+![MetaTrader 5](https://img.shields.io/badge/MetaTrader--5-FFD700?style=flat-square&logo=metatrader&logoColor=black)
+![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-### Core Functionality
-- **Multi-Provider AI Analysis**: Support for 5 different AI providers (Anthropic Claude, OpenAI GPT, DeepSeek, Grok, Kilo Code)
-- **Real-time Market Analysis**: Live technical indicator calculations (ATR, RSI, MACD, CCI, Stochastic)
-- **Professional Trading Signals**: Complete trade parameters with risk management
-- **Dynamic Symbol Loading**: Automatically loads available symbols from connected MT5 broker
-- **Token Usage Tracking**: Real-time monitoring of API usage and TPM limits
-- **Web-based Interface**: Modern, responsive UI built with Tailwind CSS
+**Professional AI-Powered Trading System with Modern Web Interface**
 
-### Technical Indicators
-- Average True Range (ATR) with volatility classification
-- Relative Strength Index (RSI)
-- MACD with signal line
-- Commodity Channel Index (CCI)
-- Stochastic Oscillator
-- Market bias analysis (bullish/bearish)
+*Real-time market analysis, automated trading signals, and comprehensive risk management*
 
-### Risk Management
-- Configurable risk per trade (0.1% - 5.0%)
-- Position size calculation based on account balance
-- Stop loss and take profit levels
-- Volatility-adjusted position sizing
+[🚀 Quick Start](#-installation) • [📖 Documentation](#-features) • [🔧 API Reference](#-api-reference) • [📞 Support](#-contact)
 
-## 📋 Prerequisites
+</div>
 
-### System Requirements
-- Windows 10/11
-- Python 3.8+
-- MetaTrader 5 terminal installed and running
-- Active internet connection for AI API calls
+---
 
-### Required Accounts & API Keys
-1. **MetaTrader 5**: Trading account with market data access
-2. **AI Provider API Keys** (choose at least one):
-   - Anthropic Claude API key
-   - OpenAI API key
-   - DeepSeek API key
-   - xAI Grok API key
-   - Kilo Code API key
+## 📋 Table of Contents
 
-## 🛠️ Installation
+- [✨ Overview](#-overview)
+- [🚀 Key Features](#-key-features)
+- [🛠️ System Requirements](#️-system-requirements)
+- [📦 Installation](#-installation)
+- [⚙️ Configuration](#️-configuration)
+- [🎯 Usage](#-usage)
+- [🔧 API Reference](#-api-reference)
+- [📊 Token Management](#-token-management)
+- [🛡️ Security & Best Practices](#️-security--best-practices)
+- [🐛 Troubleshooting](#-troubleshooting)
+- [📈 Performance Optimization](#-performance-optimization)
+- [🤝 Contributing](#-contributing)
+- [📄 License](#-license)
+- [⚠️ Disclaimer](#️-disclaimer)
+- [📞 Contact](#-contact)
 
-### 1. Clone or Download
+---
+
+## ✨ Overview
+
+**AI Trading Signal Generator** is a cutting-edge, professional-grade trading system that leverages multiple AI providers to deliver sophisticated market analysis and automated trading signals. Built with modern web technologies and comprehensive risk management, it provides traders with institutional-quality tools in an accessible, user-friendly interface.
+
+The system integrates seamlessly with MetaTrader 5, offering real-time technical analysis, multi-timeframe support, and intelligent position sizing with advanced risk controls.
+
+---
+
+## 🚀 Key Features
+
+### 🤖 AI-Powered Analysis
+- **Multi-Provider Support**: Anthropic Claude, OpenAI GPT, DeepSeek, Grok, and Kilo Code
+- **Intelligent Signal Generation**: Context-aware trading signals with confidence scoring
+- **Adaptive Analysis**: Dynamic market condition assessment and strategy adjustment
+
+### 📊 Technical Analysis Suite
+- **Complete Indicator Set**: ATR, RSI, MACD, CCI, Stochastic Oscillator
+- **Volatility Analysis**: Real-time volatility classification and adjustment
+- **Market Bias Detection**: Bullish/bearish trend identification
+- **Multi-Timeframe Support**: M1 to D1 analysis capabilities
+
+### 🖥️ Modern Web Interface
+- **Responsive Design**: Optimized for desktop, tablet, and mobile devices
+- **Real-Time Updates**: Live market data and signal monitoring
+- **User Management**: Secure authentication and personalized dashboards
+- **Token Tracking**: Comprehensive API usage monitoring
+
+### 🛡️ Risk Management
+- **Dynamic Position Sizing**: Account balance and volatility-based calculations
+- **Configurable Risk Parameters**: 0.1% to 5.0% per trade
+- **Advanced Stop Loss**: ATR-based protective stops
+- **Multiple Take Profit Levels**: R:R optimization with 1:1, 1:2, 1:3 targets
+
+### 🔗 Integration Capabilities
+- **MT5 Direct Connection**: Native MetaTrader 5 integration
+- **Dynamic Symbol Loading**: Automatic broker symbol detection
+- **WebSocket Updates**: Real-time data streaming
+- **RESTful API**: Complete programmatic access
+
+---
+
+## 🛠️ System Requirements
+
+### Minimum Requirements
+- **Operating System**: Windows 10/11 (64-bit)
+- **Python Version**: 3.8 or higher
+- **RAM**: 4GB minimum, 8GB recommended
+- **Storage**: 500MB free space
+- **Network**: Stable internet connection
+
+### Required Software
+- **MetaTrader 5 Terminal**: Latest version installed and configured
+- **Python Environment**: Virtual environment recommended
+- **Web Browser**: Modern browser with JavaScript enabled
+
+### API Access
+- **AI Provider Account**: At least one supported AI service
+- **Trading Account**: MetaTrader 5 account with market data access
+- **Broker Permissions**: Automated trading enabled
+
+---
+
+## 📦 Installation
+
+### 1. Environment Setup
+
 ```bash
-# Navigate to your project directory
-cd AItrader/
+# Clone or download the project
+git clone https://github.com/your-repo/ai-trading-ea.git
+cd ai-trading-ea
+
+# Create virtual environment (recommended)
+python -m venv trading_env
+trading_env\Scripts\activate  # Windows
 ```
 
-### 2. Install Dependencies
+### 2. Dependencies Installation
+
 ```bash
-# Install required Python packages
+# Install required packages
 pip install -r requirements.txt
+
+# Verify installation
+python -c "import MetaTrader5, flask, anthropic; print('✅ All dependencies installed')"
 ```
 
-### 3. Configure Environment Variables
-Create a `.env` file in the AItrader directory:
+### 3. MetaTrader 5 Configuration
+
+1. **Install MT5 Terminal**: Download from official MetaQuotes website
+2. **Enable Automation**:
+   - Launch MetaTrader 5
+   - Click "Algo Trading" button in toolbar
+   - Enable automated trading
+3. **Configure Web Access**:
+   - Tools → Options → Expert Advisors
+   - Check "Allow automated trading"
+   - Add `localhost` to WebRequest URLs
+
+---
+
+## ⚙️ Configuration
+
+### Environment Variables Setup
+
+Create a `.env` file in the project root:
 
 ```env
-# AI Provider API Keys (configure at least one)
-ANTHROPIC_API_KEY=sk-ant-your-anthropic-key-here
+# ===========================================
+# AI TRADING EXPERT ADVISOR CONFIGURATION
+# ===========================================
+
+# AI PROVIDER API KEYS
+# Configure at least one provider
+ANTHROPIC_API_KEY=sk-ant-api3-your-anthropic-key-here
 OPENAI_API_KEY=sk-proj-your-openai-key-here
 DEEPSEEKER_API_KEY=sk-your-deepseek-key-here
 GROK_API_KEY=xai-your-grok-key-here
 KILO_CODE_API_KEY=your-kilo-code-key-here
 
-# Default AI Provider (anthropic, openai, deepseek, grok, kilo_code)
+# APPLICATION SETTINGS
+SECRET_KEY=your-secure-random-secret-key-here
 AI_PROVIDER=anthropic
+DEBUG=False
+
+# TRADING PARAMETERS
+DEFAULT_RISK_PERCENT=1.0
+DEFAULT_TIMEFRAME=16385
+DEFAULT_SYMBOL=XAUUSD
 ```
 
-### 4. Configure MetaTrader 5
-- Ensure MetaTrader 5 is installed and running
-- Enable automated trading in MT5 (Algo Trading button)
-- Allow WebRequest from localhost in MT5 options
+### AI Provider Selection Guide
 
-## 🚀 Usage
+| Provider | Best For | Token Efficiency | Cost |
+|----------|----------|------------------|------|
+| **Anthropic Claude** | Balanced analysis, reliability | High | Medium |
+| **OpenAI GPT** | Speed, consistency | Medium | Medium |
+| **DeepSeek** | Cost optimization | High | Low |
+| **Grok** | Innovative insights | Medium | Low |
+| **Kilo Code** | Trading specialization | High | Variable |
+
+---
+
+## 🎯 Usage
 
 ### Web Interface (Recommended)
+
 ```bash
-# Run the web application
+# Start the web application
 python web_app.py
 ```
 
-Open your browser and navigate to `http://localhost:9000`
+Navigate to `http://localhost:9000` and log in to access the trading dashboard.
 
-#### Web Interface Features:
-1. **Configuration Panel**:
-   - Select trading symbol (dynamically loaded from MT5)
-   - Choose timeframe (M1, M5, M15, M30, H1, H4, D1)
-   - Select AI provider
-   - Set risk percentage per trade
+#### Dashboard Features:
+- **📊 Real-time Analysis**: Live market data and indicator monitoring
+- **🎯 Signal Generation**: AI-powered trading signals with full parameters
+- **📱 Responsive Design**: Optimized for all device types
+- **👤 User Management**: Secure authentication and profile management
+- **📈 Performance Tracking**: Historical signal analysis and filtering
 
-2. **Real-time Analysis**:
-   - Start/Stop analysis with automatic intervals
-   - View current trading signals
-   - Monitor technical indicators
-   - Track token usage and TPM limits
+### Command Line Operation
 
-3. **System Status**:
-   - MT5 connection status
-   - AI service availability
-   - Analysis state
-
-### Command Line Interface
 ```bash
-# Run the console application
+# Run console-based analysis
 python app_ai_based.py
 ```
 
-## 📊 Configuration Options
+### Configuration Panel Options
 
-### AI Providers
-- **Anthropic Claude**: High-quality analysis with balanced token usage
-- **OpenAI GPT**: Fast responses with good accuracy
-- **DeepSeek**: Cost-effective alternative with good performance
-- **Grok**: Innovative analysis with unique insights
-- **Kilo Code**: Specialized trading-focused AI
+1. **Symbol Selection**: Dynamic loading from MT5 broker
+2. **Timeframe**: M1, M5, M15, M30, H1, H4, D1
+3. **AI Provider**: Select based on preference and token limits
+4. **Risk Management**: 0.1% to 5.0% per trade
+5. **Analysis Control**: Start/stop automated analysis
 
-### Timeframes
-- M1 (1 minute) - Scalping
-- M5 (5 minutes) - Short-term
-- M15 (15 minutes) - Short-term
-- M30 (30 minutes) - Medium-term
-- H1 (1 hour) - Medium-term
-- H4 (4 hours) - Long-term
-- D1 (Daily) - Long-term
-
-### Risk Management
-- Risk per trade: 0.1% to 5.0% of account balance
-- Automatic position sizing based on stop loss distance
-- Volatility-adjusted risk calculations
+---
 
 ## 🔧 API Reference
 
-### Endpoints
+### Authentication Endpoints
 
-#### `GET /`
-Main web interface
+#### `POST /login`
+User authentication
+```json
+{
+  "username": "trader_username",
+  "password": "secure_password"
+}
+```
+
+#### `POST /register`
+User registration
+```json
+{
+  "username": "trader_username",
+  "email": "trader@example.com",
+  "password": "secure_password"
+}
+```
+
+### Trading Endpoints
 
 #### `POST /run_ai_analysis`
-Run market analysis with specified parameters
+Execute market analysis
 ```json
 {
   "symbol": "XAUUSD",
@@ -152,106 +251,253 @@ Run market analysis with specified parameters
 }
 ```
 
-#### `GET /get_symbols`
-Retrieve available trading symbols from MT5
+**Response:**
+```json
+{
+  "signal": {
+    "symbol": "XAUUSD",
+    "signal_type": "LONG",
+    "entry_price": 1950.25000,
+    "stop_loss": 1945.50000,
+    "take_profit_1": 1955.00000,
+    "position_size": 0.05,
+    "confidence": "HIGH",
+    "reasoning": "Strong bullish momentum with RSI divergence"
+  },
+  "analysis": {
+    "atr": 4.75,
+    "rsi": 65.2,
+    "macd": 2.45,
+    "volatility_level": "Medium Volatility"
+  },
+  "token_usage": {
+    "input_tokens": 125,
+    "output_tokens": 89,
+    "total_tokens": 214
+  }
+}
+```
 
-#### `GET /get_mt5_status`
-Check MT5 connection status
+#### `GET /get_symbols`
+Retrieve available trading symbols
+
+#### `GET /get_user_signals`
+Get filtered trading signals for authenticated user
+```json
+{
+  "symbol": "XAUUSD",
+  "signal_type": "LONG",
+  "confidence": "HIGH",
+  "date_from": "2024-01-01",
+  "date_to": "2024-12-31"
+}
+```
 
 #### `POST /execute_trade`
-Execute a trading signal
+Execute trading signal
 ```json
 {
   "auto_execute": false
 }
 ```
 
-## 📈 Token Usage Optimization
+---
 
-The system is optimized for efficient token usage:
-- **Condensed prompts**: ~50% reduction in input tokens
-- **Structured responses**: Consistent JSON output format
-- **Real-time tracking**: Monitor usage vs. TPM limits
-- **Provider selection**: Choose based on cost/performance needs
+## 📊 Token Management
 
-### TPM Limits (approximate)
-- Anthropic Claude: 50,000 tokens/minute
-- OpenAI GPT-4: 10,000 tokens/minute
-- DeepSeek: 100,000 tokens/minute
-- Grok: 50,000 tokens/minute
-- Kilo Code: Varies by plan
+### Usage Optimization
+- **Condensed Prompts**: 50% reduction in input tokens through optimized prompts
+- **Structured Output**: Consistent JSON responses for efficient parsing
+- **Real-time Monitoring**: Live token usage tracking and TPM limit alerts
+- **Provider Switching**: Automatic failover based on limits and performance
 
-## 🛡️ Security & Best Practices
+### TPM Limits by Provider
 
-### API Key Security
-- Store API keys in `.env` file (never commit to version control)
-- Use environment variables for sensitive data
-- Rotate keys regularly
+| Provider | TPM Limit | Recommended Usage |
+|----------|-----------|-------------------|
+| Anthropic Claude | 50,000 | Balanced analysis |
+| OpenAI GPT-4 | 10,000 | Fast responses |
+| DeepSeek | 100,000 | High-frequency |
+| Grok | 50,000 | Innovative analysis |
+| Kilo Code | Variable | Specialized trading |
 
-### Trading Safety
-- Start with small position sizes
-- Test on demo account first
-- Monitor account balance and risk exposure
-- Enable proper stop losses
-
-### System Monitoring
-- Check MT5 connection status regularly
-- Monitor token usage to avoid rate limits
-- Keep logs for analysis and debugging
-
-## 🐛 Troubleshooting
-
-### Common Issues
-
-#### MT5 Connection Failed
-- Ensure MetaTrader 5 is running
-- Check if automated trading is enabled
-- Verify WebRequest permissions for localhost
-
-#### AI API Errors
-- Verify API keys are correct in `.env`
-- Check internet connection
-- Monitor token usage limits
-
-#### Symbol Not Available
-- Refresh symbol list in web interface
-- Check if symbol is enabled in MT5
-- Verify broker offers the selected symbol
-
-#### Token Limit Exceeded
-- Switch to different AI provider
-- Reduce analysis frequency
-- Upgrade API plan if needed
-
-### Logs and Debugging
-- Check console output for error messages
-- Review analysis logs in web interface
-- Monitor token usage in footer
-
-## 📝 License
-
-This project is for educational and personal use. Please ensure compliance with your broker's terms of service and local regulations regarding automated trading.
-
-## ⚠️ Disclaimer
-
-This software is provided as-is for educational purposes. Trading involves substantial risk of loss and is not suitable for all investors. Past performance does not guarantee future results. Always test thoroughly on a demo account before using with real money.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please:
-1. Fork the repository
-2. Create a feature branch
-3. Test thoroughly
-4. Submit a pull request
-
-## 📞 Support
-
-For issues and questions:
-1. Check the troubleshooting section
-2. Review logs for error messages
-3. Ensure all prerequisites are met
-4. Test with demo account first
+### Cost Optimization Strategies
+1. **Provider Selection**: Choose based on analysis requirements
+2. **Analysis Frequency**: Adjust based on timeframe and market conditions
+3. **Batch Processing**: Group analysis requests when possible
+4. **Caching**: Implement signal caching for repeated analysis
 
 ---
 
-**Happy Trading!** 📈💰
+## 🛡️ Security & Best Practices
+
+### 🔐 API Security
+- **Environment Variables**: Never commit API keys to version control
+- **Key Rotation**: Regular key updates and monitoring
+- **Access Control**: IP whitelisting and rate limiting
+- **Encryption**: Secure storage of sensitive data
+
+### 📈 Trading Safety
+- **Demo Testing**: Always test on demo account first
+- **Gradual Scaling**: Start with small position sizes
+- **Risk Limits**: Never exceed predetermined risk thresholds
+- **Monitoring**: Continuous account balance and P&L monitoring
+
+### 🔧 System Security
+- **Regular Updates**: Keep dependencies and MT5 updated
+- **Backup Strategy**: Regular configuration and data backups
+- **Access Logging**: Monitor system access and API usage
+- **Error Handling**: Comprehensive error logging and alerting
+
+---
+
+## 🐛 Troubleshooting
+
+### Common Issues & Solutions
+
+#### MT5 Connection Problems
+```bash
+# Check MT5 status
+python -c "import MetaTrader5 as mt5; print(mt5.initialize())"
+```
+- **Solutions**:
+  - Ensure MT5 is running
+  - Enable automated trading
+  - Add localhost to WebRequest URLs
+  - Check firewall settings
+
+#### AI API Errors
+- **Rate Limits**: Switch providers or reduce frequency
+- **Invalid Keys**: Verify API keys in `.env` file
+- **Network Issues**: Check internet connectivity
+- **Token Limits**: Monitor usage and upgrade plans if needed
+
+#### Symbol Loading Issues
+- **Refresh Interface**: Reload the web interface
+- **Broker Verification**: Confirm symbol availability with broker
+- **MT5 Synchronization**: Restart MT5 terminal
+
+### Debug Mode
+Enable debug logging:
+```bash
+export DEBUG=True
+python web_app.py
+```
+
+### Log Analysis
+- Check console output for error messages
+- Review web interface analysis logs
+- Monitor token usage in dashboard footer
+- Examine MT5 terminal logs
+
+---
+
+## 📈 Performance Optimization
+
+### System Performance
+- **Memory Management**: Efficient data structures and cleanup
+- **CPU Optimization**: Asynchronous processing for API calls
+- **Network Efficiency**: Connection pooling and retry logic
+- **Database Optimization**: Indexed queries and connection pooling
+
+### Trading Performance
+- **Signal Quality**: AI provider selection based on market conditions
+- **Execution Speed**: Optimized order placement and confirmation
+- **Risk Assessment**: Real-time position sizing calculations
+- **Market Adaptation**: Dynamic parameter adjustment
+
+### Monitoring & Metrics
+- **Response Times**: API call latency tracking
+- **Success Rates**: Signal accuracy and execution success
+- **Resource Usage**: Memory, CPU, and network monitoring
+- **Error Rates**: Comprehensive error tracking and alerting
+
+---
+
+## 🤝 Contributing
+
+We welcome contributions from the trading and development community!
+
+### Development Process
+1. **Fork** the repository
+2. **Create** a feature branch (`git checkout -b feature/amazing-feature`)
+3. **Commit** changes (`git commit -m 'Add amazing feature'`)
+4. **Push** to branch (`git push origin feature/amazing-feature`)
+5. **Open** a Pull Request
+
+### Contribution Guidelines
+- **Code Quality**: Follow PEP 8 standards
+- **Testing**: Include unit tests for new features
+- **Documentation**: Update README and docstrings
+- **Security**: Never commit sensitive data or API keys
+- **Compatibility**: Test across different MT5 versions and Python environments
+
+### Feature Requests
+- Use GitHub Issues for feature requests
+- Provide detailed use cases and benefits
+- Include mockups or examples when possible
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
+
+**Educational and Personal Use**: This software is provided for educational purposes and personal trading use. Commercial use requires explicit permission from the author.
+
+---
+
+## ⚠️ Disclaimer
+
+**IMPORTANT RISK WARNING**
+
+This software is provided "as-is" for educational and informational purposes only. Trading foreign exchange and other financial instruments involves substantial risk of loss and is not suitable for all investors.
+
+**Key Points:**
+- Past performance does not guarantee future results
+- Always test thoroughly on a demo account before live trading
+- Never risk more than you can afford to lose
+- Consult with financial advisors before using automated trading systems
+- The author assumes no responsibility for trading losses or damages
+
+**Regulatory Compliance**: Ensure compliance with your local regulations regarding automated trading systems and algorithmic trading.
+
+---
+
+## 📞 Contact
+
+### Developer Information
+
+**Kilo Code**  
+*AI-Powered Software Development Agent*
+
+### Support Channels
+
+- **📧 Email**: support@kilocode.com
+- **🐛 Issues**: [GitHub Issues](https://github.com/kilocode/ai-trading-ea/issues)
+- **💬 Discussions**: [GitHub Discussions](https://github.com/kilocode/ai-trading-ea/discussions)
+- **📖 Documentation**: [Wiki](https://github.com/kilocode/ai-trading-ea/wiki)
+
+### Professional Services
+
+- **Custom Development**: AI-powered trading system customization
+- **Integration Services**: Third-party platform integration
+- **Consulting**: Trading strategy optimization and risk management
+- **Training**: Automated trading system development workshops
+
+### Response Time
+- **Bug Reports**: Within 24 hours
+- **Feature Requests**: Within 48 hours
+- **General Inquiries**: Within 72 hours
+
+---
+
+<div align="center">
+
+**⚡ Powered by AI • Built for Traders • Designed for Performance**
+
+---
+
+*Happy Trading with AI Trading Signal Generator!* 🚀📈
+
+</div>

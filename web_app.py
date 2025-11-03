@@ -1,5 +1,5 @@
 """
-AI Trading Expert Advisor Web Interface
+AI Trading Signal Generator Web Interface
 Provides a professional web UI for the AI-based trading system
 """
 
@@ -385,6 +385,6 @@ if __name__ == '__main__':
     with app.app_context():
         db.create_all()
 
-    print("🚀 Starting AI Trading Expert Advisor Web Interface...")
+    print("🚀 Starting AI Trading Signal Generator Web Interface...")
     print("📊 Open your browser to http://localhost:9000")
     app.run(debug=True, host='0.0.0.0', port=9000)
