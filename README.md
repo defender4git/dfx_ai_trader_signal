@@ -2,7 +2,7 @@
 # 🤖 AI Trading Signal Generator
 =======
 # AI Trading Signal Generator
->>>>>>> fde187184aa8c6c5ea01ae626ab26ece046c86c8
+
 
 <div align="center">
 
