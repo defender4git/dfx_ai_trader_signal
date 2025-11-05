@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # 🤖 AI Trading Signal Generator
 =======
 # AI Trading Signal Generator
@@ -12,7 +12,7 @@
 ![MetaTrader 5](https://img.shields.io/badge/MetaTrader--5-FFD700?style=flat-square&logo=metatrader&logoColor=black)
 ![License](https://img.shields.io/badge/License-MIT-green?style=flat-square)
 
-<<<<<<< HEAD
+
 **Professional AI-Powered Trading System with Modern Web Interface**
 =======
 ### Core Functionality
@@ -343,7 +343,7 @@ Execute trading signal
 
 ---
 
-<<<<<<< HEAD
+
 ## 🛡️ Security & Best Practices
 
 ### 🔐 API Security
